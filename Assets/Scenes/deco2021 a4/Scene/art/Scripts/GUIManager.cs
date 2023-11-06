@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:198497a32819d8b4bd2f7f4e31fec39ec925f04486dfa3065323ca67cf31a072
-size 644
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+public class GUIManager : MonoBehaviour {
+	public Text guiTextMode;
+	public Slider sizeSlider;
+	public TexturePainter painter;
+
+	public void SetBrushMode(int newMode){
+		Painter_BrushMode brushMode =newMode==0? Painter_BrushMode.DECAL:Painter_BrushMode.PAINT; //Cant set enums for buttons :(
+		string colorText=brushMode==Painter_BrushMode.PAINT?"orange":"purple";	
+		guiTextMode.text="<b>Mode:</b><color="+colorText+">"+brushMode.ToString()+"</color>";
+		painter.SetBrushMode (brushMode);
+	}
+	public void UpdateSizeSlider(){
+		painter.SetBrushSize (sizeSlider.value);
+	}
+}
